@@ -75,18 +75,6 @@ export class Immer {
 				if (hasError) scope.revoke()
 				else scope.leave()
 			}
-			if (result instanceof Promise) {
-				return result.then(
-					result => {
-						scope.usePatches(patchListener)
-						return this.processResult(result, scope)
-					},
-					error => {
-						scope.revoke()
-						throw error
-					}
-				)
-			}
 			scope.usePatches(patchListener)
 			return this.processResult(result, scope)
 		} else {
